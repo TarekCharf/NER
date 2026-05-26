@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Core palette */
+  --bg-base:       #080b14;
+  --bg-surface:    #0d1120;
+  --bg-elevated:   #111827;
+  --bg-overlay:    #141c2e;
+
+  /* Borders */
+  --border-subtle: rgba(99, 120, 180, 0.10);
+  --border-default:rgba(99, 120, 180, 0.18);
+  --border-active: rgba(99, 120, 180, 0.35);
+
+  /* Accent — electric indigo/violet */
+  --accent:        #6366f1;
+  --accent-light:  #818cf8;
+  --accent-glow:   rgba(99, 102, 241, 0.25);
+  --accent-subtle: rgba(99, 102, 241, 0.08);
+
+  /* Secondary accent — teal */
+  --teal:          #2dd4bf;
+  --teal-glow:     rgba(45, 212, 191, 0.20);
+
+  /* Text */
+  --text-primary:  #e8eaf2;
+  --text-secondary:#8b93b0;
+  --text-muted:    #4a5270;
+
+  /* Status */
+  --success:       #34d399;
+  --warning:       #fbbf24;
+  --danger:        #f87171;
+
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Syne', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+#root {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-default); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-active); }
+
+/* Glass utility */
+.glass {
+  background: rgba(13, 17, 32, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Glow effects */
+.glow-accent { box-shadow: 0 0 24px var(--accent-glow); }
+.glow-teal   { box-shadow: 0 0 24px var(--teal-glow); }
+
+/* Animated gradient border */
+@keyframes borderRotate {
+  from { --angle: 0deg; }
+  to   { --angle: 360deg; }
+}
+
+/* Fade-in */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.4s ease forwards; }
+
+/* Pulse dot */
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
