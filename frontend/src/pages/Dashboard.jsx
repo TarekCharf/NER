@@ -17,7 +17,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    userService.getProfile().then(setUser).catch(() => navigate("/login"));
+    userService.getProfile().then((res) => {setUser(res.data || res)}).catch(() => navigate("/login"));
     nerService.getStats()
       .then((res) => setStats(res.data))
       .catch(() => {})

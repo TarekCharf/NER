@@ -57,3 +57,32 @@ class UserViewSet(GenericViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()  # ✅ Déclenche la méthode update() du UserSerializer
         return Response(serializer.data)
+    
+    # POST /api/users/change-password/
+    @action(detail=False, methods=["post"], url_path="change-password")
+    def change_password(self, request):
+        user = request.user
+        old_password = request.data.get("old_password")
+        new_password = request.data.get("new_password")
+
+        if not old_password or not new_password:
+            return Response(
+                {"error": "L'ancien et le nouveau mot de passe sont requis."}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Vérification de l'ancien mot de passe
+        if not user.check_password(old_password):
+            return Response(
+                {"old_password": ["L'ancien mot de passe est incorrect."]}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Validation et enregistrement du nouveau mot de passe
+        user.set_password(new_password)
+        user.save()
+
+        return Response(
+            {"status": "Mot de passe modifié avec succès !"}, 
+            status=status.HTTP_200_OK
+        )

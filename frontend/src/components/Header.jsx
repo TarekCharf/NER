@@ -8,7 +8,7 @@ export default function Header() {
   const [hasNotif, setHasNotif] = useState(true);
 
   useEffect(() => {
-    userService.getProfile().then(setUser).catch(() => {});
+    userService.getProfile().then((res) => {setUser(res.data || res)}).catch(() => {});
   }, []);
 
   const initials = user?.username
